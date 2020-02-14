@@ -27,7 +27,7 @@ void setup() {
     delay(1);
   }
  
-  Serial.begin(57600);
+  Serial.begin(115200);
 
   // RTC
   if (!rtc.begin()) {
@@ -99,6 +99,10 @@ void loop() {
     lcd.print(now.second(), DEC);
   }
 
+  //check
+  //Serial.print(now);
+  Serial.println();
+
   // BME
   lcd.setCursor(0,1);
   lcd.print(bme.temperature);
@@ -126,6 +130,26 @@ void loop() {
   lcd.setCursor(14,0);
   lcd.print("V");
 
-  delay(1000);
+  Serial.println(bme.temperature, 3);
+//  Serial.print(' ');
+//  Serial.print(" C");
+
+  Serial.println(bme.humidity, 3);
+//  Serial.print(' ');
+//  Serial.print(" %");
+
+  Serial.println(bme.pressure / 100.0, 3);
+//  Serial.print(' ');
+//  Serial.print(" hPa");
+
+  Serial.println(bme.gas_resistance / 1000.0, 3);
+//  Serial.print(' ');
+//  Serial.print(" KOhms");
+
+//using baud 115200
+//data comes in too fast for processing to read cleanly
+//results in poorly formatted text file
+//3 seconds works ok
+  delay(3000);
   
 }
