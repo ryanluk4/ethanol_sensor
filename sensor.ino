@@ -1,4 +1,10 @@
-// BME
+// Ethanol Sensor
+// Arduino [BME Sensor, RTC, LCD, SD]
+
+// Ryan Luk
+// rcluk@ucsc.edu
+
+// BME [TEMP, HUMIDITY, PRESSURE, GAS]
 #include <Wire.h>
 #include <SPI.h>
 #include <Adafruit_Sensor.h>
@@ -12,22 +18,47 @@ Adafruit_BME680 bme; // I2C
 //Adafruit_BME680 bme(BME_CS); // hardware SPI
 //Adafruit_BME680 bme(BME_CS, BME_MOSI, BME_MISO, BME_SCK);
 
-// RTC
+// RTC [CLOCK]
 #include "RTClib.h"
 RTC_PCF8523 rtc;
 char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
-// LCD
+// LCD [DISPLAY]
 #include <LiquidCrystal.h>
-LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2); //I forgot what these numbers correspond to
+// something to do with the data transfer (look up documentation)
+
+// SD [DATA]
+#include <SPI.h>
+#include <SD.h>
+File myFile;
+int pinCS = 53; // chip select for Arduino MEGA
 
 void setup() {
 
+  // Serial
   while (!Serial) {
+    // wait until serial console is open
     delay(1);
   }
- 
   Serial.begin(115200);
+
+  // SD
+  pinMode(pinCS, OUTPUT);
+  delay(500);
+  digitalWrite(pinCS, LOW);
+  if(!SD.begin()){
+    Serial.println("SD card initialization failed!");
+    while (1);
+  }
+  // test
+  myFile = SD.open("tester.txt", FILE_WRITE);
+  if(myFile) {
+    myFile.println("testing");
+    myFile.close();
+  }
+  delay(500);
+  digitalWrite(pinCS, HIGH);
 
   // RTC
   if (!rtc.begin()) {
