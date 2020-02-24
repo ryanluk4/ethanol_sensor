@@ -33,6 +33,9 @@ LiquidCrystal lcd(12, 11, 5, 4, 3, 2); //I forgot what these numbers correspond 
 #include <SD.h>
 File myFile;
 int pinCS = 53; // chip select for Arduino MEGA
+//SCK = 52
+//"MOSI" on sd reader = 51 (should really be MISO?)
+//"MISO" on sd reader = 50 (should really be MOSI?)
 
 void setup() {
 
@@ -41,31 +44,21 @@ void setup() {
     // wait until serial console is open
     delay(1);
   }
-  Serial.begin(115200);
+  Serial.begin(9600);
 
   // SD
-  pinMode(pinCS, OUTPUT);
-  delay(500);
-  digitalWrite(pinCS, LOW);
-  if(!SD.begin()){
-    Serial.println("SD card initialization failed!");
-    while (1);
+  SD.begin(pinCS);
+  // resets file
+  if(SD.exists("data.txt")){
+    SD.remove("data.txt");
   }
-  // test
-  myFile = SD.open("tester.txt", FILE_WRITE);
-  if(myFile) {
-    myFile.println("testing");
-    myFile.close();
-  }
-  delay(500);
-  digitalWrite(pinCS, HIGH);
 
   // RTC
   if (!rtc.begin()) {
     Serial.println("Couldn't find RTC");
     while (1);
   }
-  if (! rtc.initialized()) {
+  if (!rtc.initialized()) {
     Serial.println("RTC is NOT running!");
     // following line sets the RTC to the date & time this sketch was compiled
     // rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
@@ -162,25 +155,21 @@ void loop() {
   lcd.print("V");
 
   Serial.println(bme.temperature, 3);
-//  Serial.print(' ');
-//  Serial.print(" C");
-
   Serial.println(bme.humidity, 3);
-//  Serial.print(' ');
-//  Serial.print(" %");
-
   Serial.println(bme.pressure / 100.0, 3);
-//  Serial.print(' ');
-//  Serial.print(" hPa");
-
   Serial.println(bme.gas_resistance / 1000.0, 3);
-//  Serial.print(' ');
-//  Serial.print(" KOhms");
 
-//using baud 115200
-//data comes in too fast for processing to read cleanly
-//results in poorly formatted text file
-//3 seconds works ok
+  myFile = SD.open("data.txt", FILE_WRITE);
+  if(myFile) {
+    myFile.println(String(bme.temperature));
+    myFile.println(String(bme.humidity));
+    myFile.println(String(bme.pressure / 100.0));
+    myFile.println(String(bme.gas_resistance / 1000.0));
+    myFile.println(String(sensorVoltage));
+    myFile.println();
+    myFile.close();
+  }
+  
   delay(3000);
   
 }
