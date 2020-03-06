@@ -17,20 +17,32 @@ Design an ethanol sensor product that can be used for research or in wineries to
 
 [Adafruit BME680](https://www.adafruit.com/product/3660) - Temperature, Humidity, Pressure, and Gas Sensor
 > Measures temperature, relative humidity, atmospheric pressure, and gas (VOC) resistance. Runs on 3.3V or 5V.
+> **Required pins:** power, ground, SCK/SCL, SDI/SDA
 
 [Adafruit GUVA-S12SD](https://www.adafruit.com/product/1918) - UV Sensor
 > Measures UV light (240-370nm) via analog input. Output is a voltage, which can be converted to UV Index by dividing by 0.1V. Runs on 3.3V or 5V.
+> **Required pins:** power, ground, analog
 
 [Adafruit PCF8523](https://www.adafruit.com/product/3295) - Real time clock (RTC)
 > Real time clock for timing and date purposes. Runs on 3.3V or 5V.
+> **Required pins:** power, ground, SCL/SCK, SDA/SDI
 
 [Unknown Brand](https://www.dx.com/p/sd-tf-card-adapter-module-for-arduino-3-3v-5v-compatible-multi-functional-reading-writing-module-2044018.html#.XlROd2hKjb0) - SD Card Reader
 > Arduino writes data to SD card. **Note:** The documentation for the Adafruit version (which we assume is essentially identical) has the MISO/MOSI pins reversed. Runs on 5V, not sure about 3.3V.
+> **Required pins:** power, ground, MISO (50), MOSI (51), SCK (52), CS (53)
 
 [Unknown Brand](https://www.pololu.com/product/1219/specs) - 20x4 LCD
 > Used for displaying time stamp and sensor data (usable pinout given by: 1. ground | 2. power | 3. ground | 4. pin 12 | 5. ground | 6. pin 11 | 7 | 8 | 9 | 10 | 11. pin 5 | 12. pin 4 | 13. pin 3 | 14. pin 2 | 15. power | 16. ground | 17 | 18). Runs on 5V. 
 
-**Wiring Color Schema:** Red = Power, Black = Ground, Green = SDA, Yellow = SCL
+**Wiring Color Schema:** Red = Power, Black = Ground, Green = SDA/SDI, Yellow = SCL/SCK
+
+**Multi-use Wiring:**
+1. 6 power (BME sensor, UV sensor, RTC, SD card reader, LCD 2x)
+2. 8 ground (BME sensor, UV sensor, RTC, SD card reader, LCD 2x)
+3. 2 SCL/SCK (BME sensor, RTC)
+4. 2 SDA/SDI (BME sensor, RTC)
+> Most components have the option to scale down from 5V to 3.3V
+> The SD card reader uses its own set of digital MISO, MOSI, SCK, CS pins and thus, is not included in this multi-use section.
 
 # Code
 
