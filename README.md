@@ -38,8 +38,6 @@ Design an ethanol sensor product that can be used for research or in wineries to
 [Unknown Brand](https://www.pololu.com/product/1219/specs) - 20x4 LCD
 > Used for displaying time stamp and sensor data (usable pinout given by: 1. ground | 2. power | 3. ground | 4. pin 12 | 5. ground | 6. pin 11 | 7 | 8 | 9 | 10 | 11. pin 5 | 12. pin 4 | 13. pin 3 | 14. pin 2 | 15. power | 16. ground | 17 | 18). Runs on 5V. 
 
-**Wiring Color Schema:** Red = Power, Black = Ground, Green = SDA/SDI, Yellow = SCL/SCK
-
 **Multi-use Wiring:**
 1. 6 power (BME sensor, UV sensor, RTC, SD card reader, LCD 2x)
 2. 8 ground (BME sensor, UV sensor, RTC, SD card reader, LCD 2x)
@@ -49,6 +47,8 @@ Design an ethanol sensor product that can be used for research or in wineries to
 > Most components have the option to scale down from 5V to 3.3V
 
 > The SD card reader uses its own set of digital MISO, MOSI, SCK, CS pins and thus, is not included in this multi-use section.
+
+**Wiring Color Schema:** Red = Power, Black = Ground, Green = SDA/SDI, Yellow = SCL/SCK
 
 # Code
 
