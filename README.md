@@ -38,15 +38,15 @@ Design an ethanol sensor product that can be used for research or in wineries to
 [Unknown Brand](https://www.pololu.com/product/1219/specs) - 20x4 LCD
 > Used for displaying time stamp and sensor data (usable pinout given by: 1. ground | 2. power | 3. ground | 4. pin 12 | 5. ground | 6. pin 11 | 7 | 8 | 9 | 10 | 11. pin 5 | 12. pin 4 | 13. pin 3 | 14. pin 2 | 15. power | 16. ground | 17 | 18). Runs on 5V. 
 
-**Multi-use Wiring:**
-1. 6 power (BME sensor, UV sensor, RTC, SD card reader, LCD 2x)
-2. 8 ground (BME sensor, UV sensor, RTC, SD card reader, LCD 2x)
-3. 2 SCL/SCK (BME sensor, RTC)
-4. 2 SDA/SDI (BME sensor, RTC)
-
-> Most components have the option to scale down from 5V to 3.3V
+**Multi-use Wiring For PCB**
+- 6 power (BME sensor, UV sensor, RTC, SD card reader, LCD 2x)
+- 8 ground (BME sensor, UV sensor, RTC, SD card reader, LCD 4x)
+- 2 SCL/SCK (BME sensor, RTC)
+- 2 SDA/SDI (BME sensor, RTC)
 
 > The SD card reader uses its own set of digital MISO, MOSI, SCK, CS pins and thus, is not included in this multi-use section.
+
+> Most components have the option to scale down from 5V to 3.3V
 
 **Wiring Color Schema:** Red = Power, Black = Ground, Green = SDA/SDI, Yellow = SCL/SCK
 
@@ -57,3 +57,13 @@ sensor.ino
 
 data.pde
 > Side file for data collection on computer. Since Arduino does not have a native Serial-to-file data system, this processing code is allowed to listen to the Serial output and writes it to a text file. Not going to be used once the SD card is implemented. This also requires a high baud rate for some reason (otherwise the readings get really messed up).
+
+# To-do
+
+- [x] Solder RTC
+- [] Solder SD card reader
+- [] Find mounting screw or bolt that will fit UV sensor
+- [] Solder and mount UV sensor
+- [] Plug up holes near BME sensor location
+- [] Solder and mount BME sensor
+- [] Solder and mount LCD
