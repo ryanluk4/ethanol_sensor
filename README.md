@@ -61,9 +61,9 @@ data.pde
 # To-do
 
 - [x] Solder RTC
-- [] Solder SD card reader
-- [] Find mounting screw or bolt that will fit UV sensor
-- [] Solder and mount UV sensor
-- [] Plug up holes near BME sensor location
-- [] Solder and mount BME sensor
-- [] Solder and mount LCD
+- [ ] Solder SD card reader
+- [ ] Find mounting screw or bolt that will fit UV sensor
+- [ ] Solder and mount UV sensor
+- [ ] Plug up holes near BME sensor location
+- [ ] Solder and mount BME sensor
+- [ ] Solder and mount LCD
