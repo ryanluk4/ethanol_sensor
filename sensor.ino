@@ -60,11 +60,9 @@ void setup() {
   }
   if (!rtc.initialized()) {
     Serial.println("RTC is NOT running!");
-    // following line sets the RTC to the date & time this sketch was compiled
-    // rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
-    // This line sets the RTC with an explicit date & time, for example to set
-    // January 21, 2014 at 3am you would call:
-    // rtc.adjust(DateTime(2014, 1, 21, 3, 0, 0));
+
+    //sets datetime to computers date and time
+    rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
   }
 
   // BME
@@ -89,7 +87,7 @@ void loop() {
   // UV
   float sensorVoltage;
   float sensorValue;
-  sensorValue = analogRead(A0);
+  sensorValue = analogRead(A1);
   sensorVoltage = sensorValue / 1023 * 3.3;
 
   // BME
@@ -106,7 +104,7 @@ void loop() {
   lcd.setCursor(0, 0);
 
   // RTC
-  DateTime now = (rtc.now() - TimeSpan(0,1,26,0));
+  DateTime now = rtc.now();
   if(now.second() == 0){
     lcd.clear();
     lcd.print(now.hour(), DEC);
@@ -122,11 +120,7 @@ void loop() {
     lcd.print(':');
     lcd.print(now.second(), DEC);
   }
-
-  //check
-  //Serial.print(now);
-  Serial.println();
-
+  
   // BME
   lcd.setCursor(0,1);
   lcd.print(bme.temperature);
@@ -154,10 +148,15 @@ void loop() {
   lcd.setCursor(14,0);
   lcd.print("V");
 
-  Serial.println(bme.temperature, 3);
-  Serial.println(bme.humidity, 3);
-  Serial.println(bme.pressure / 100.0, 3);
-  Serial.println(bme.gas_resistance / 1000.0, 3);
+  Serial.println();
+  Serial.println(now.hour());
+  Serial.println(now.minute());
+  Serial.println(now.second());
+//  Serial.println(bme.temperature, 3);
+//  Serial.println(bme.humidity, 3);
+//  Serial.println(bme.pressure / 100.0, 3);
+//  Serial.println(bme.gas_resistance / 1000.0, 3);
+//  Serial.println(sensorVoltage);
 
   myFile = SD.open("data.txt", FILE_WRITE);
   if(myFile) {
@@ -170,6 +169,6 @@ void loop() {
     myFile.close();
   }
   
-  delay(3000);
+  delay(1000);
   
 }

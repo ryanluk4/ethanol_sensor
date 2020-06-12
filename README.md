@@ -60,7 +60,9 @@ data.pde
 
 # To-do
 
-- [x] Solder RTC
+- [ ] Solidify connections? Rework PCB design?
+
+- [ ] Solder RTC
 - [ ] Solder SD card reader
 - [ ] Find mounting screw or bolt that will fit UV sensor
 - [ ] Solder and mount UV sensor
