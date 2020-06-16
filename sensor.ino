@@ -1,5 +1,5 @@
 // Ethanol Sensor
-// Arduino [BME Sensor, RTC, LCD, SD]
+// Arduino [BME Sensor, UV Sensor, RTC, LCD, SD]
 
 // Ryan Luk
 // rcluk@ucsc.edu
@@ -85,10 +85,8 @@ void setup() {
 void loop() {
 
   // UV
-  float sensorVoltage;
-  float sensorValue;
-  sensorValue = analogRead(A1);
-  sensorVoltage = sensorValue / 1023 * 3.3;
+  float sensorValue = analogRead(A1);
+  float sensorVoltage = sensorValue / 1023 * 3.3;
 
   // BME
   unsigned long endTime = bme.beginReading();
@@ -148,10 +146,10 @@ void loop() {
   lcd.setCursor(14,0);
   lcd.print("V");
 
-  Serial.println();
-  Serial.println(now.hour());
-  Serial.println(now.minute());
-  Serial.println(now.second());
+//  Serial.println();
+//  Serial.println(now.hour());
+//  Serial.println(now.minute());
+//  Serial.println(now.second());
 //  Serial.println(bme.temperature, 3);
 //  Serial.println(bme.humidity, 3);
 //  Serial.println(bme.pressure / 100.0, 3);

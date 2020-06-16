@@ -61,11 +61,14 @@ data.pde
 # To-do
 
 - [ ] Solidify connections? Rework PCB design?
+- [ ] Plug up holes near BME sensor location
+- [ ] Widen BME sensor mounting location
+- [ ] Find mounting screw or bolt that will fit UV sensor
+
+- Below are soldering tasks
 
 - [ ] Solder RTC
 - [ ] Solder SD card reader
-- [ ] Find mounting screw or bolt that will fit UV sensor
-- [ ] Solder and mount UV sensor
-- [ ] Plug up holes near BME sensor location
-- [ ] Solder and mount BME sensor
-- [ ] Solder and mount LCD
+- [ ] Solder UV sensor
+- [ ] Solder BME sensor
+- [ ] Solder LCD
