@@ -2,14 +2,28 @@
 
 This is Arduino and related code for an ethanol sensor being designed by Peter Weiss and team.
 
-Team members include: 
-- James Zhou (electrical design)
-- Ryan Luk (coding)
-- Sharukh "Sharky" Lal (physical design)
-
 # Objective
 
 Design an ethanol sensor product that can be used for research or in wineries to regulate ethanol concentrations.
+
+# Quick-Start
+
+## Code
+- Run `git clone $CLONE_URL`
+- Open `sensor.ino` in Arduino IDE, make changes
+- Upload to Arduino
+- Commit changes, push
+
+## Wiring
+- Power: 5V (can use rail on breadboard)
+- Ground: Ground (can use rail on breadboard)
+- SCK/SCK: Marked on Arduino
+- SDA/SLI: Marked on Arduino
+- Analog: A1 on Arduino (can be changed in `sensor.ino`)
+- MISO: MISO from SD card reader goes to 50 on Arduino
+- MOSI: MOSI from SD card reader goes to 51 on Arduino
+- SCK: SCK from SD card reader goes to 52 on Arduino
+- CS: CS from SD card reader goes to 53 on Arduino (chip select)
 
 # Hardware
 
@@ -36,9 +50,9 @@ Design an ethanol sensor product that can be used for research or in wineries to
 > **Required pins:** power, ground, MISO (50), MOSI (51), SCK (52), CS (53)
 
 [Unknown Brand](https://www.pololu.com/product/1219/specs) - 20x4 LCD
-> Used for displaying time stamp and sensor data (usable pinout given by: 1. ground | 2. power | 3. ground | 4. pin 12 | 5. ground | 6. pin 11 | 7 | 8 | 9 | 10 | 11. pin 5 | 12. pin 4 | 13. pin 3 | 14. pin 2 | 15. power | 16. ground | 17 | 18). Runs on 5V. 
+> Used for displaying time stamp and sensor data (usable pinout given by: 1. ground | 2. power | 3. ground | 4. pin 12 | 5. ground | 6. pin 11 | 7 | 8 | 9 | 10 | 11. pin 5 | 12. pin 4 | 13. pin 3 | 14. pin 2 | 15. power | 16. ground | 17 | 18). Runs on 5V. (For example: `1. ground` means pin 1 on the LCD corresponds to a ground pin - any empty pins like 7, 8, 9, 10, 17, 18 are not used) [Some more documentation](https://www.instructables.com/id/Interfacing-20x4-LCD-with-Arduino/)
 
-**Multi-use Wiring For PCB**
+**Multi-use Wiring For PCB Lines**
 - 6 power (BME sensor, UV sensor, RTC, SD card reader, LCD 2x)
 - 8 ground (BME sensor, UV sensor, RTC, SD card reader, LCD 4x)
 - 2 SCL/SCK (BME sensor, RTC)
@@ -46,22 +60,16 @@ Design an ethanol sensor product that can be used for research or in wineries to
 
 > The SD card reader uses its own set of digital MISO, MOSI, SCK, CS pins and thus, is not included in this multi-use section.
 
-> Most components have the option to scale down from 5V to 3.3V
-
-**Wiring Color Schema:** Red = Power, Black = Ground, Green = SDA/SDI, Yellow = SCL/SCK
+> Most components have the option to scale down from 5V to 3.3V. I use 5V and haven't tested all components with 3.3V.
 
 # Code
 
 sensor.ino
 > Main file for LCD, RTC, sensors, and SD card reader. Currently displays time, temperature, humidity, pressure, gas resistance, and UV as a voltage on the LCD and writes data to the SD card.
 
-data.pde
-> Side file for data collection on computer. Since Arduino does not have a native Serial-to-file data system, this processing code is allowed to listen to the Serial output and writes it to a text file. Not going to be used once the SD card is implemented. This also requires a high baud rate for some reason (otherwise the readings get really messed up).
-
 # To-do
 
 - [ ] Solidify connections? Rework PCB design?
-
 - [ ] Solder RTC
 - [ ] Solder SD card reader
 - [ ] Find mounting screw or bolt that will fit UV sensor
